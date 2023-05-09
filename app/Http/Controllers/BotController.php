@@ -13,37 +13,27 @@ class BotController extends Controller
 {
     //
 
+    public $open_ai = null; 
 
-    public function chat($question){
+    public function __construct(){
 
         $open_ai_key = getenv('OPENAI_API_KEY');
         $open_ai = new OpenAi($open_ai_key);
+        $this->open_ai = $open_ai; 
 
-        $complete = $open_ai->chat([
-            'model' => 'gpt-3.5-turbo',
-            'messages' => [
-                [
-                    "role" => "system",
-                    "content" => "You are a helpful assistant."
-                ],
-                [
-                    "role" => "user",
-                    "content" => "Who won the world series in 2020?"
-                ],
-                [
-                    "role" => "assistant",
-                    "content" => "The Los Angeles Dodgers won the World Series in 2020."
-                ],
-                [
-                    "role" => "user",
-                    "content" => "Where was it played?"
-                ],
-            ],
-            'temperature' => 1.0,
-            'max_tokens' => 4000,
-            'frequency_penalty' => 0,
-            'presence_penalty' => 0,
-         ]);
+    }
+
+    public function chat($question){
+
+
+        $config = config("chat.config");
+
+        array_push($config['messages'], [
+            "role" => "user",
+            "content" => $question
+        ]); 
+
+        $complete = $this->open_ai->chat($config);
 
          // decode response
         $d = json_decode($complete);
@@ -51,7 +41,10 @@ class BotController extends Controller
         // Get Content
         
         error_log($complete);
-        //return $d->choices[0]->message->content;
+
+        $content = $d->choices[0]->message->content;
+
+        return $content;
 
     }
 
@@ -74,13 +67,15 @@ class BotController extends Controller
         try {
 
             $botman->hears("{question}", function (BotMan $bot, $question) {
-                $test = "ok";
                 $content = $this->chat($question);
+                $bot->typesAndWaits(2);
                 $bot->reply($content);
             });
         
         } catch (\Exception $e){
 
+            error_log($e->getMessage());
+            
             // catch error 
 
         }
