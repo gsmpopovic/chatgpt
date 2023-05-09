@@ -28,8 +28,8 @@ class BotController extends Controller
         $botman = BotManFactory::create($config);
         
         // Give the bot something to listen for.
-        $botman->hears('hello', function (BotMan $bot) {
-            $bot->reply('Hello yourself.');
+        $botman->hears("{question}", function (BotMan $bot, $question) {
+            $bot->reply($question);
         });
         
         // Start listening
