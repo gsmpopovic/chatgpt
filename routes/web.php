@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $route = route('chat');
+
+    return view('welcome')->with([
+        'route' => "$route"
+    ]);
 });
+
+Route::get('/chat', function () {
+    return view('welcome');
+})->name('chat');
+
+Route::post('/botman', [BotController::class, 'index']);
