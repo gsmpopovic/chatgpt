@@ -71,10 +71,19 @@ class BotController extends Controller
         $botman = BotManFactory::create($config);
         
         // Give the bot something to listen for.
-        $botman->hears("{question}", function (BotMan $bot, $question) {
-            $content = $this->chat($question);
-            $bot->reply($content);
-        });
+        try {
+
+            $botman->hears("{question}", function (BotMan $bot, $question) {
+                $test = "ok";
+                $content = $this->chat($question);
+                $bot->reply($content);
+            });
+        
+        } catch (\Exception $e){
+
+            // catch error 
+
+        }
         
         // Start listening
         $botman->listen(); 
