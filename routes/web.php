@@ -24,7 +24,7 @@ Route::get('/', function () {
 });
 
 Route::get('/chat', function () {
-    return view('welcome');
+    return view('chat');
 })->name('chat');
 
 Route::post('/botman', [BotController::class, 'index']);
