@@ -12,6 +12,8 @@ defineProps({
 });
 
 const formValues = {
+
+    /* Widget settings */
     title: '',
     chat_server:'/botman',
     iframe_endpoint:'/botman/chat',
@@ -29,6 +31,13 @@ const formValues = {
     mobile_width:'',
     video_height:'',
     about_link:'',
+    
+    /* Bot settings */
+    model:'',
+    temperature:'',
+    max_tokens:'',
+    frequency_penalty:'',
+    presence_penalty:'',
 };
 
 const normalizeInputName = function(string){
