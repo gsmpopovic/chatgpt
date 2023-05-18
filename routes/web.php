@@ -25,6 +25,14 @@ Route::get('/', function () {
     ]);
 });
 
+/* View to create a bot. */
+Route::get('/bot/create', function () {
+    return Inertia::render('Bot/Create');
+})->name('bot.create');
+
+/* Route to store a bot*/
+Route::post('/bot/store', [BotController::class, 'store'])->name('bot.store');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
