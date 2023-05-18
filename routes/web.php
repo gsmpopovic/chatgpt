@@ -35,18 +35,22 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('/', function () {
+/* Chat view for messenger */ 
+Route::get('/chat', function () {
+    return view('chat');
+})->name('chat');
 
+/* Returns the messenger chat view with dummy bot. */
+Route::get('/sandbox', function () {
+    
     $route = route('chat');
 
     return view('welcome')->with([
         'route' => "$route"
     ]);
-});
 
-Route::get('/chat', function () {
-    return view('chat');
-})->name('chat');
+})->name('sandbox');
 
+/* Route at which bot is accessed. */
 Route::post('/botman', [BotController::class, 'index']);
 
