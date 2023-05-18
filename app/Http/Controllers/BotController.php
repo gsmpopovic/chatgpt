@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use BotMan\BotMan\BotMan;
 use BotMan\BotMan\BotManFactory;
 use BotMan\BotMan\Drivers\DriverManager;
-
 use Orhanerday\OpenAi\OpenAi;
 
 class BotController extends Controller
@@ -82,6 +81,12 @@ class BotController extends Controller
         
         // Start listening
         $botman->listen(); 
+    }
+
+    public function store(Request $request){
+
+        return to_route('bot.create');
+
     }
 
 }
