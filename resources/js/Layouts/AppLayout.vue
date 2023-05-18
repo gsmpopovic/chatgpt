@@ -54,6 +54,9 @@ const logout = () => {
                                 <NavLink :href="route('sandbox')" :active="route().current('sandbox')">
                                     Sandbox
                                 </NavLink>
+                                <NavLink :href="route('bot.create')" :active="route().current('bot.create')">
+                                    Create Bot
+                                </NavLink>
                             </div>
                         </div>
 
@@ -199,6 +202,9 @@ const logout = () => {
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('sandbox')" :active="route().current('sandbox')">
                             Sandbox
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('bot.create')" :active="route().current('bot.create')">
+                                    Create Bot
                         </ResponsiveNavLink>
                     </div>
 
